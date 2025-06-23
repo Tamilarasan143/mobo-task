@@ -1,9 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { HiMiniPhoneArrowUpRight } from "react-icons/hi2";
 import Logo from "./Logo";
-import NavLink from "./NavLink";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -12,67 +13,52 @@ const navLinks = [
   { name: "Calculator", href: "#" },
   { name: "Contact Us", href: "#" },
   { name: "News & Blog", href: "#" },
+  { name: " Client Portal", href: "#" },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-[#1c2552] text-white">
-      <div className="container mx-auto flex justify-between items-center px-4 py-2 text-sm">
-        <div>
-          Open Hours: Mon – Thu 9am to 5pm | Fri 9am to 5:30pm | Closed: Sat –
-          Sun
-        </div>
-        <div className="hidden md:flex items-center gap-6">
-          <span>01234567891</span>
-          <span>Call Free now on</span>
-        </div>
-      </div>
-
-      <div className="bg-[#1c2552] border-t border-white border-opacity-10">
-        <div className="container mx-auto flex justify-between items-center px-4 py-4">
+    <header className="bg-[#1c2552] text-white relative z-50">
+      <div className="container mx-auto px-4 py-2">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center text-sm">
           <Logo />
+          <div className="flex flex-col md:flex-row md:items-center md:gap-4 mt-2 md:mt-0 text-white/90">
+            <span className="hidden md:flex max-w-90 text-end">
+              Open Hours: Mon – Thu 9am to 5pm | Fri 9am to 5:30pm | Closed: Sat
+              – Sun
+            </span>
+            <div className="flex items-center rounded-2xl border p-2 border-white gap-2 mt-1 md:mt-0">
+              <HiMiniPhoneArrowUpRight size={30} />
+              <div className="flex flex-col ">
+                <span>01234567891</span>
+                <span>Call Free now on</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <nav className="hidden md:flex gap-6 items-center">
-            {navLinks.map((link) => (
-              <NavLink key={link.name} href={link.href}>
-                {link.name}
-              </NavLink>
-            ))}
-            <Link
-              href="#"
-              className="bg-white text-[#1c2552] font-semibold py-1 px-4 rounded"
-            >
-              Client Portal
-            </Link>
-          </nav>
-
+        <div className=" flex items-center justify-center md:gap-6">
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-white"
+            className="md:hidden mt-4"
           >
             {mobileOpen ? (
-              <XMarkIcon className="w-6 h-6" />
+              <XMarkIcon className="w-6 h-6 text-white" />
             ) : (
-              <Bars3Icon className="w-6 h-6" />
+              <Bars3Icon className="w-6 h-6 text-white" />
             )}
           </button>
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden px-4 pb-4">
+          <div className="md:hidden mt-3 pb-4">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="block py-1">
+              <Link key={link.name} href={link.href} className={`block py-1`}>
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="#"
-              className="block bg-white text-[#1c2552] font-semibold py-2 px-4 mt-2 rounded"
-            >
-              Client Portal
-            </Link>
           </div>
         )}
       </div>
